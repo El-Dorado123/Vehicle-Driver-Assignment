@@ -1,0 +1,142 @@
+<div class="form-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class="title">User Registration</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="userForm" (ngOnSubmit)="onSubmit()" class="form-grid">
+        <mat-grid-list [cols]="cols" rowHeight="100px" [gutterSize]="'10px'">
+          <mat-grid-tile>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Registration Number</mat-label>
+              <input
+                matInput
+                formControlName="registration"
+                type="text"
+                (keypress)="restrictToAplhaNumeric($event)"
+              />
+              <mat-error> R.No is required </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Imei Number</mat-label>
+              <input
+                matInput
+                formControlName="imei"
+                type="text"
+                (keypress)="restrictToAplhaNumeric($event)"
+              />
+              <mat-error> Imei number is required </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Driver Name</mat-label>
+              <input
+                matInput
+                formControlName="name"
+                type="text"
+                (keypress)="restrictToString($event)"
+              />
+              <mat-error> Name is required </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>location</mat-label>
+              <input
+                matInput
+                formControlName="location"
+                type="text"
+                (keypress)="restrictToString($event)"
+              />
+              <mat-error> location is required </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile
+            ><mat-form-field appearance="outline" class="full-width">
+              <mat-label>Phone Number</mat-label>
+              <input
+                matInput
+                formControlName="phone"
+                type="tel"
+                maxlength="10"
+                (keypress)="restrictToNumbers($event)"
+              />
+              @if(!userForm.get('phone')?.value?.length &&
+              userForm.get('phone')?.touched ){
+              <mat-error>Phone is required</mat-error>
+              }@else if(userForm.get('phone')?.hasError('pattern')){
+              <mat-error> Please enter a valid phone number </mat-error>
+              }
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="status">
+                @for(status of driverStatus; track $index) {
+                <mat-option value="{{ status.value }}">
+                  {{ status.label }}
+                </mat-option>
+                }
+              </mat-select>
+              <mat-error> Status is required </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Vehicle</mat-label>
+              <mat-select formControlName="vehicle">
+                @for(vehicle of VehicleList; track $index) {
+                <mat-option value="{{ vehicle }}">
+                  {{ vehicle | titlecase }}
+                </mat-option>
+                }
+              </mat-select>
+              <mat-error> Vehicle is required </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>LastSeen</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="lastseen"
+                type="text"
+                placeholder="MM/DD/YYYY"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              @if (userForm.get('date')?.touched &&
+              userForm.get('date')?.invalid) { @if
+              (userForm.get('date')?.hasError('required')) {
+              <mat-error>Date is required</mat-error>
+              } @else if (userForm.get('date')?.hasError('matDatepickerParse'))
+              {
+              <mat-error>Please enter a valid date</mat-error>
+              } }
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+      <div class="button-container">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          (click)="onSubmit()"
+          [disabled]="userForm.invalid"
+        >
+          Submit
+        </button>
+        <button mat-button type="button" (click)="resetForm()">Reset</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

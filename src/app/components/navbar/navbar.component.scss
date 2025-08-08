@@ -1,0 +1,51 @@
+.logo {
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+.navbar{
+    background-color: #2b3945;
+    color: white;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav-container{
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-links {
+  display: flex;
+  gap: 10px;
+}
+.nav-header{
+    color: white;
+    font-family: Nunito;
+    outline: none;
+    text-decoration: none;
+}
+
+.nav-item{
+  color: white !important;
+  font-family: Nunito;
+  font-weight: 500;
+}
+.nav-item:hover {
+  background-color: rgba(206, 194, 194, 0.1);
+}
+
+.mobile-menu {
+    color: white;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  .mobile-menu {
+    display: block;
+  }
+}

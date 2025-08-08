@@ -1,0 +1,13 @@
+.vehicle-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.expansion-panel{
+  margin-bottom: 2rem;
+}
+.align-submit-button{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}

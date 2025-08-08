@@ -1,0 +1,31 @@
+@for (driver of driverList; track $index) {
+<mat-expansion-panel
+  class="expansion-panel"
+  [(expanded)]="driver.panelOpenState"
+>
+  <mat-expansion-panel-header>
+    <mat-panel-title>{{ driver?.location | titlecase }}</mat-panel-title>
+    <mat-panel-description
+      >Drivers {{ driver?.users?.length }}</mat-panel-description
+    >
+  </mat-expansion-panel-header>
+  <div class="vehicle-container">
+    @for (vehicle of driver?.users; track $index) {
+    <app-vehicle-card
+      [vehicle]="vehicle"
+      [location]="driver?.location"
+    ></app-vehicle-card>
+    }
+  </div>
+  <div class="align-submit-button">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      (click)="onSubmit()"
+    >
+      Submit
+    </button>
+  </div>
+</mat-expansion-panel>
+}

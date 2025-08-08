@@ -1,0 +1,20 @@
+<mat-toolbar class="navbar">
+  <div class="nav-container">
+    <a class="nav-header" routerLink="/"
+      ><span class="logo">Fleet Management System</span></a
+    >
+    <div class="nav-links">
+      <a class="nav-item" mat-button routerLink="/dashboard">Dashboard</a>
+      <a class="nav-item" mat-button routerLink="/drivers">Drivers</a>
+      <a class="nav-item" mat-button routerLink="/user">Add User</a>
+    </div>
+  </div>
+  <button mat-icon-button class="mobile-menu" [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/dashboard">Dashboard</button>
+    <button mat-menu-item routerLink="/drivers">Drivers</button>
+    <button mat-menu-item routerLink="/user">Add User</button>
+  </mat-menu>
+</mat-toolbar>
